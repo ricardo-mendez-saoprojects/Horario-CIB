@@ -1,0 +1,82 @@
+// ═══ Tokens Horario CIB ═══
+// Identidad propia (no es la marca SAOProjects): azul tinta institucional
+// sobre neutros fríos. Light es el tema base; dark se activa con body.dark-mode.
+// Contrastes verificados sobre --surface (light: #fff · dark: #171f33):
+//   --primary #2f4daa → 7.4:1 · --pos #1a7f4b → 4.6:1 · --neg #c23934 → 4.9:1
+//   --warn-text #9a6a03 → 4.6:1 · --text-muted #5a6478 → 6.4:1
+
+:root {
+  // Neutros
+  --bg: #f2f5f9;
+  --surface: #ffffff;
+  --surface-2: #f7f9fc;          // insets, stripes de tabla, cabeceras de card
+  --border: #e2e8f1;
+  --border-strong: #c9d3e2;
+
+  // Texto
+  --text: #16233b;
+  --text-muted: #5a6478;
+  --text-dim: #8b93a7;
+
+  // Marca
+  --primary: #2f4daa;
+  --primary-hover: #263f8f;
+  --primary-soft: #e8edfb;       // fondos de chip / hover suave
+  --primary-text: #2f4daa;       // acento usado como texto (links, activos)
+  --on-primary: #ffffff;
+
+  // Semánticos de balance (concepto heredado de la app original)
+  --pos: #1a7f4b;   --pos-soft: #e2f5ea;
+  --neg: #c23934;   --neg-soft: #fbe9e8;
+  --zero: #64748b;  --zero-soft: #eef1f5;
+
+  // Días no laborables: festivo (ámbar) y vacaciones (celeste)
+  --warn-text: #9a6a03;  --warn-soft: #fdf3d8;
+  --info-text: #14618d;  --info-soft: #dff1fb;
+
+  // Navbar: azul marino fijo en ambos temas — ancla la identidad de la app
+  --nav-bg: #16233b;
+  --nav-text: #eef2f9;
+  --nav-muted: #9aa7c0;
+  --nav-border: rgba(255,255,255,0.12);
+
+  // Escalas
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --shadow-card: 0 1px 2px rgba(22,35,59,0.06), 0 4px 16px rgba(22,35,59,0.05);
+  --shadow-pop: 0 8px 30px rgba(22,35,59,0.16);
+  --nav-h: 64px;
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark-mode {
+  --bg: #0f1524;
+  --surface: #171f33;
+  --surface-2: #1d2740;
+  --border: rgba(255,255,255,0.09);
+  --border-strong: rgba(255,255,255,0.18);
+
+  --text: #e8ecf5;
+  --text-muted: #a6b0c5;
+  --text-dim: #79839b;
+
+  --primary: #4c66c9;            // relleno de botón: blanco encima da 5.4:1
+  --primary-hover: #5b79e3;
+  --primary-soft: rgba(109,139,238,0.16);
+  --primary-text: #9db4fa;       // acento como texto: 7.1:1 sobre surface
+  --on-primary: #ffffff;
+
+  --pos: #58d295;   --pos-soft: rgba(88,210,149,0.13);
+  --neg: #ef6f68;   --neg-soft: rgba(239,111,104,0.14);
+  --zero: #93a0b4;  --zero-soft: rgba(147,160,180,0.14);
+
+  --warn-text: #e5b558;  --warn-soft: rgba(229,181,88,0.13);
+  --info-text: #6fc3ef;  --info-soft: rgba(111,195,239,0.13);
+
+  --nav-bg: #121a2d;
+  --nav-border: rgba(255,255,255,0.09);
+
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.32);
+  --shadow-pop: 0 12px 36px rgba(0,0,0,0.5);
+}

@@ -1,0 +1,65 @@
+@use '../base/mixins' as *;
+
+// Layout de la página de registros: sidebar (calendario + festivos) + contenido
+.layout-registros {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 20px;
+  align-items: start;
+
+  > * { min-width: 0; }
+
+  @include lg { grid-template-columns: 1fr; }
+}
+
+.registros__aside {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include lg { order: 2; }
+}
+
+.registros__main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+// Lista de días no laborables en el rango
+.nonworking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nonworking-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  font-size: 13px;
+
+  &__date { @include tnum; font-weight: 600; }
+
+  &__remove {
+    color: var(--text-dim);
+    font-size: 15px;
+    line-height: 1;
+    padding: 4px 6px;
+    border-radius: 5px;
+    flex-shrink: 0;
+
+    &:hover { color: var(--neg); background: var(--neg-soft); }
+  }
+}
+
+#logs-table,
+#weekly-summary,
+#monthly-summary {
+  scroll-margin: calc(var(--nav-h) + 16px);
+}

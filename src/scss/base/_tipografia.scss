@@ -1,0 +1,46 @@
+@use 'mixins' as *;
+
+h1, h2, h3, h4 {
+  font-family: 'Archivo', system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--text);
+}
+
+// Escala de app (no de landing): títulos contenidos, jerarquía por peso
+h1 { font-size: 26px; }
+h2 { font-size: 20px; }
+h3 { font-size: 17px; }
+h4 { font-size: 15px; font-weight: 600; }
+
+p { color: var(--text-muted); }
+
+// Eyebrow: etiqueta pequeña sobre datos (Semana 2026-W20, Mes, Año…)
+.eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+// Cifra de tiempo: siempre tabular. La cifra grande protagoniza la card.
+.time-figure {
+  @include tnum;
+  font-family: 'Archivo', system-ui, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+
+  small {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dim);
+  }
+}
+
+@include md {
+  h1 { font-size: 22px; }
+}

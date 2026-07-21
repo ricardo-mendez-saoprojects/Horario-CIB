@@ -1,0 +1,19 @@
+@use '../base/mixins' as *;
+
+.layout-admin {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 20px;
+  align-items: start;
+
+  > * { min-width: 0; }
+
+  @include lg { grid-template-columns: 1fr; }
+}
+
+// La tabla de usuarios anida mini-formularios por celda
+.table--admin {
+  td { white-space: normal; }
+
+  .input-group { min-width: 210px; }
+}

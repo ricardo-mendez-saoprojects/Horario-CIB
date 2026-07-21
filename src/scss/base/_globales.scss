@@ -1,0 +1,88 @@
+@use 'mixins' as *;
+
+/* Las fuentes (Archivo + Public Sans) se cargan con <link> desde el HTML:
+   un @import CSS bloquea el renderizado y se descarga más tarde. */
+
+html {
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+body {
+  font-family: 'Public Sans', system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 32px 32px 48px;
+
+  @include md { padding: 20px 16px 40px; }
+}
+
+// Contenedor estrecho para páginas de una sola card (auth, error)
+.container-narrow {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+// ── Rejillas de la app (sin sistema de 12 columnas: cada layout declara el suyo)
+// min-width:0 en los hijos: las tablas con nowrap no deben ensanchar la
+// columna; desbordan dentro de su .table-wrap con scroll propio.
+.grid { display: grid; gap: 20px; }
+.grid > * { min-width: 0; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+@include lg {
+  .grid-3 { grid-template-columns: 1fr; }
+}
+@include md {
+  .grid-2 { grid-template-columns: 1fr; }
+}
+
+// ── Cabecera de página: título + acciones
+.page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.page-head__sub { color: var(--text-muted); margin-top: 2px; }
+
+.page-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+// ── Utilidades mínimas
+.text-muted { color: var(--text-muted); }
+.text-end { text-align: right; }
+.small { font-size: 13px; }
+.mt-2 { margin-top: 8px; }
+.mt-4 { margin-top: 16px; }
+.mb-4 { margin-bottom: 16px; }
+
+// ── Focus visible (accesibilidad)
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}

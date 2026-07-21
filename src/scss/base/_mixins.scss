@@ -1,0 +1,15 @@
+// Breakpoints — la app es desktop-first en uso real (se ficha desde el puesto),
+// pero todo debe degradar bien a móvil.
+$bp-sm: 480px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+
+@mixin sm { @media (max-width: $bp-sm) { @content; } }
+@mixin md { @media (max-width: $bp-md) { @content; } }
+@mixin lg { @media (max-width: $bp-lg) { @content; } }
+
+// Numerales tabulares: obligatorio en cualquier celda u componente con horas
+@mixin tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}

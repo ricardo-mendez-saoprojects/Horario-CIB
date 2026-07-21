@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iniciar sesión · Horario CIB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="public/build/css/app.css">
+</head>
+<body>
+<script>if(localStorage.getItem('horario-theme')==='dark')document.body.classList.add('dark-mode');</script>
+
+<div class="auth">
+  <div class="auth__box">
+    <div class="auth__brand">Horario CIB</div>
+    <div class="card">
+      <div class="card__body">
+        <h1 class="mb-4">Iniciar sesión</h1>
+        <div class="alert alert--danger" role="alert">Usuario o contraseña incorrectos</div>
+        <form>
+          <div class="field">
+            <label class="form-label" for="username">Usuario</label>
+            <input class="form-control" type="text" id="username" name="username" value="amiller" autocomplete="username">
+          </div>
+          <div class="field">
+            <label class="form-label" for="password">Contraseña</label>
+            <input class="form-control" type="password" id="password" name="password" value="12345678" autocomplete="current-password">
+          </div>
+          <button class="btn btn--primary btn--block" type="button">Entrar</button>
+        </form>
+        <div class="auth__foot">¿No tienes cuenta? <a href="register.html">Crear cuenta</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">Registro de jornada en el CIB · Demo visual sin backend</footer>
+<script src="public/build/js/main.min.js"></script>
+</body>
+</html>

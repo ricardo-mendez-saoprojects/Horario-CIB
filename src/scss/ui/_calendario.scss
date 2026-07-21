@@ -1,0 +1,66 @@
+// Overrides de FullCalendar con los tokens del sistema
+#calendar {
+  --fc-border-color: var(--border);
+  --fc-page-bg-color: var(--surface);
+  --fc-neutral-bg-color: var(--surface-2);
+  --fc-today-bg-color: var(--primary-soft);
+  --fc-button-bg-color: var(--surface-2);
+  --fc-button-border-color: var(--border-strong);
+  --fc-button-text-color: var(--text);
+  --fc-button-hover-bg-color: var(--primary);
+  --fc-button-hover-border-color: var(--primary);
+  --fc-button-active-bg-color: var(--primary);
+  --fc-button-active-border-color: var(--primary);
+
+  font-size: 12.5px;
+}
+
+.fc .fc-toolbar-title {
+  font-family: 'Archivo', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.fc .fc-button {
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  font-size: 12.5px;
+}
+
+.fc .fc-button:hover { color: var(--on-primary); }
+
+.fc .fc-col-header-cell-cushion,
+.fc .fc-daygrid-day-number {
+  text-decoration: none;
+  color: var(--text-muted);
+}
+
+.fc .fc-col-header-cell-cushion {
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.fc .fc-daygrid-week-number {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: transparent;
+  text-decoration: none;
+}
+
+.fc .fc-scrollgrid {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.fc .fc-event-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+}
+
+.fc .fc-daygrid-event { max-width: 100%; border-radius: 5px; }

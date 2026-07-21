@@ -1,0 +1,68 @@
+@use '../base/mixins' as *;
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 14px;
+  transition: border-color 0.15s ease;
+
+  &:hover { border-color: var(--text-dim); }
+
+  &::placeholder { color: var(--text-dim); }
+}
+
+select.form-control { cursor: pointer; }
+
+body.dark-mode select.form-control option {
+  background: var(--surface);
+}
+
+.form-control--sm {
+  padding: 5px 10px;
+  font-size: 13px;
+}
+
+// Rejilla de formulario: cada campo declara su ancho con estas clases
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+
+  .field-3  { grid-column: span 3; }
+  .field-4  { grid-column: span 4; }
+  .field-6  { grid-column: span 6; }
+  .field-8  { grid-column: span 8; }
+  .field-12 { grid-column: span 12; }
+
+  @include md {
+    .field-3, .field-4, .field-6, .field-8 { grid-column: span 12; }
+  }
+}
+
+.field { margin-bottom: 16px; }
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+// Bloque campo + botón en línea (filtros, admin)
+.input-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}

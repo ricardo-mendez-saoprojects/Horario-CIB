@@ -1,0 +1,6 @@
+// El dashboard usa .grid/.grid-2/.grid-3 de globales; aquí solo lo específico.
+.chart-box {
+  padding: 16px 20px;
+
+  canvas { max-width: 100%; }
+}
