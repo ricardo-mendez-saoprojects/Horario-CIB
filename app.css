@@ -1,0 +1,139 @@
+:root {
+	--maxw: 1100px;
+}
+
+.container-narrow {
+	max-width: var(--maxw);
+	margin: 0 auto;
+}
+
+.table td, 
+.table th {
+	vertical-align: middle;
+}
+
+.badge.total {
+	font-size: 0.95rem;
+}
+
+/* Verde */
+.table td.balance-pos {
+	color: #198754;
+	font-weight: 600;
+}
+
+/* Rojo */
+.table td.balance-neg {
+	color: #DC3545;
+	font-weight: 600;
+}
+
+/* Gris */
+table td.balance-zero {
+	color: #6C757D;
+	font-weight: 600;
+}
+
+.table tr.nonworking-row td {
+	background-color: rgba(255, 193, 7, 0.08);
+}
+
+.td-propio {
+	border: 1px solid black;
+	padding: 5px;
+}
+
+#calendar {
+	background: #FFF;
+	border-radius: 16px;
+	padding: 12px;
+	box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.fc .fc-toolbar-title {
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+
+.fc .fc-button {
+	border-radius: 10px;
+}
+
+.fc .fc-col-header-cell-cushion {
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.fc .fc-daygrid-day-number {
+	text-decoration: none;
+}
+
+.fc .fc-day-today {
+	background-color: rgba(13, 110, 253, 0.08) !important;
+}
+
+.fc .fc-daygrid-week-number {
+	font-weight: 600;
+	color: #6C757D;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+	border-color: #DEE2E6;
+}
+
+.fc .fc-scrollgrid {
+	border-radius: 12px;
+	overflow: hidden;
+}
+
+.dropdown-menu {
+	border-radius: 14px;
+}
+
+.dropdown-menu form .form-label {
+	font-weight: 600;
+	margin-bottom: 0.35rem;
+}
+
+.navbar .btn,
+.navbar .dropdown {
+	white-space: nowrap;
+}
+
+.navbar .ms-auto {
+	flex-wrap: nowrap;
+}
+
+.navbar,
+.navbar .container-fluid,
+.navbar .row,
+.navbar [class^="col-"],
+.navbar [class*=" col-"] {
+	overflow: visible !important;
+}
+
+.navbar .dropdown-menu {
+	z-index: 2000;
+}
+
+.fc .fc-event-title {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.fc .fc-daygrid-event {
+	max-width: 100%;
+}
+
+.pagination {
+	flex-wrap: wrap;
+	gap: 0.15rem;
+}
+
+#logs-table,
+#weekly-summary,
+#monthly-summary {
+	scroll-margin: 90px;
+}
