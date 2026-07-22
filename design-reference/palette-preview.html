@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paleta Horario CIB × DevStack — combos claro/oscuro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="manrope/manrope.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Public Sans', system-ui, sans-serif; background: #e8ecf2; color: #16233b; padding: 40px 24px 80px; }
+  .wrap { max-width: 1240px; margin: 0 auto; }
+  h1 { font-family: 'Archivo', sans-serif; font-size: 26px; letter-spacing: -0.02em; }
+  .intro { color: #5a6478; margin: 8px 0 32px; max-width: 860px; line-height: 1.6; }
+  .panels { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  @media (max-width: 900px) { .panels { grid-template-columns: 1fr; } }
+
+  /* ─── Panel: cada combo define sus variables ─── */
+  .panel { border-radius: 18px; overflow: hidden; border: 1px solid rgba(22,35,59,0.12); }
+  .panel__head { padding: 12px 18px; background: #fff; border-bottom: 1px solid #e2e8f1; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .panel__head h2 { font-family: 'Archivo', sans-serif; font-size: 15px; }
+  .panel__head code { font-size: 11px; color: #5a6478; }
+  .panel__body { padding: 24px; background: var(--bg); color: var(--text); font-family: var(--font, inherit); display: flex; flex-direction: column; gap: 18px; }
+
+  /* Componentes CIB genéricos (leen las variables del panel) */
+  .mininav { display: flex; align-items: center; gap: 14px; background: var(--nav-bg); color: var(--nav-text); padding: 10px 16px; border-radius: 10px; font-size: 13px; }
+  .mininav b { font-family: var(--font-head, 'Archivo'), sans-serif; }
+  .mininav b::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--pos); margin-right: 8px; }
+  .mininav span { opacity: 0.65; }
+  .mininav .active { margin-left: auto; background: rgba(255,255,255,0.14); padding: 4px 10px; border-radius: 7px; opacity: 1; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card, 16px); box-shadow: var(--shadow-card); padding: 18px 20px; transition: 0.15s ease-in-out; }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .figrow { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .fig { font-family: var(--font-head, 'Archivo'), sans-serif; font-weight: 700; font-size: 24px; font-variant-numeric: tabular-nums; }
+  .fig small { font-size: 14px; font-weight: 500; color: var(--muted); }
+  .chip { font-size: 12.5px; font-weight: 700; padding: 2px 9px; border-radius: 99px; font-variant-numeric: tabular-nums; }
+  .chip--neg { background: var(--neg-soft); color: var(--neg); }
+  .chip--pos { background: var(--pos-soft); color: var(--pos); }
+  .progress { position: relative; height: 8px; margin-top: 14px; border-radius: 99px; background: var(--track); box-shadow: var(--shadow-track, none); }
+  .progress i { display: block; height: 100%; width: 96%; border-radius: 99px; background: var(--bar, var(--primary)); }
+  .progress::after { content: ''; position: absolute; top: -3px; bottom: -3px; right: 0; width: 2px; border-radius: 2px; background: var(--border-strong); }
+
+  .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .btn { font: inherit; font-size: 14px; font-weight: 600; padding: 9px 18px; border: 1px solid transparent; border-radius: var(--radius-btn, 8px); cursor: pointer; transition: 0.2s ease-in-out; }
+  .btn--primary { color: #fff; background: var(--grad, var(--primary)); background-size: 200%; background-position-x: 100%; box-shadow: var(--shadow-btn, none); }
+  .btn--primary:hover { background-position-x: 0%; box-shadow: var(--shadow-btn-press, none); }
+  .btn--outline { background: var(--surface); border-color: var(--border-strong); color: var(--text); box-shadow: var(--shadow-btn2, none); }
+  .btn--outline:hover { border-color: var(--primary); color: var(--primary-text, var(--primary)); }
+  .btn--danger { background: var(--neg-soft); color: var(--neg); font-size: 12.5px; padding: 6px 12px; }
+
+  .input { width: 100%; font: inherit; font-size: 14px; padding: 10px 14px; color: var(--text); background: var(--input-bg, var(--surface)); border: var(--input-border, 1px solid var(--border-strong)); border-radius: var(--radius-btn, 8px); box-shadow: var(--shadow-input, none); outline: none; }
+  .input::placeholder { color: var(--muted); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+  th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); text-align: left; padding: 8px 12px; background: var(--surface-2); }
+  td { padding: 9px 12px; border-top: 1px solid var(--border); }
+  .ticons { display: inline-flex; gap: 8px; color: var(--muted); }
+  .ticons svg:hover { color: var(--primary-text, var(--primary)); }
+
+  .iconrow { display: flex; gap: 14px; color: var(--muted); align-items: center; }
+  .iconrow svg { width: 20px; height: 20px; }
+  .iconrow svg:hover { color: var(--primary-text, var(--primary)); }
+
+  /* ══ Combo 1-2: CIB actual ══ */
+  .t-cib-light {
+    --bg:#f2f5f9; --surface:#fff; --surface-2:#f7f9fc; --border:#e2e8f1; --border-strong:#c9d3e2;
+    --text:#16233b; --muted:#5a6478; --primary:#2f4daa; --primary-text:#2f4daa;
+    --pos:#1a7f4b; --pos-soft:#e2f5ea; --neg:#c23934; --neg-soft:#fbe9e8; --track:#eef1f5;
+    --nav-bg:#16233b; --nav-text:#eef2f9;
+    --shadow-card: 0 1px 2px rgba(22,35,59,0.06), 0 4px 16px rgba(22,35,59,0.05);
+  }
+  .t-cib-dark {
+    --bg:#0f1524; --surface:#171f33; --surface-2:#1d2740; --border:rgba(255,255,255,0.09); --border-strong:rgba(255,255,255,0.18);
+    --text:#e8ecf5; --muted:#a6b0c5; --primary:#4c66c9; --primary-text:#9db4fa;
+    --pos:#58d295; --pos-soft:rgba(88,210,149,0.13); --neg:#ef6f68; --neg-soft:rgba(239,111,104,0.14); --track:rgba(147,160,180,0.14);
+    --nav-bg:#121a2d; --nav-text:#eef2f9;
+    --shadow-card: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.32);
+  }
+
+  /* ══ Combo 3-4: CIB + acabado neumórfico DevStack ══ */
+  .t-cibneu-light {
+    --bg:#f2f5f9; --surface:#f2f5f9; --surface-2:#e9edf4; --border:transparent; --border-strong:#c9d3e2;
+    --text:#16233b; --muted:#5a6478; --primary:#1d5fd6; --primary-text:#1d5fd6;
+    --pos:#1a7f4b; --pos-soft:#dff0e7; --neg:#c23934; --neg-soft:#f7e4e3; --track:#e4e9f0;
+    --nav-bg:#16233b; --nav-text:#eef2f9;
+    --grad: linear-gradient(51deg, #1865E0 50%, #199EF2 80%, #16B6F5 100%);
+    --bar: linear-gradient(40deg, #1865E0 0%, #199EF2 60%, #16B6F5 100%);
+    --radius-btn: 500px; --radius-card: 12px;
+    --shadow-card: -15px -15px 20px rgba(255,255,255,0.8), 15px 15px 20px rgba(57,65,124,0.08);
+    --shadow-btn: -5px -5px 15px rgba(255,255,255,0.9), 5px 5px 15px rgba(24,101,224,0.3);
+    --shadow-btn-press: -2px -2px 5px rgba(255,255,255,0.9), 2px 2px 5px rgba(24,101,224,0.3);
+    --shadow-btn2: -5px -5px 15px rgba(255,255,255,0.9), 4px 4px 12px rgba(57,65,124,0.2);
+    --input-border: none;
+    --shadow-input: inset 3px 3px 6px rgba(57,65,124,0.1), inset -3px -3px 6px #fff;
+    --shadow-track: inset 1px 1px 1px rgba(57,65,124,0.15), inset -1px -1px 1px #fff;
+  }
+  .t-cibneu-light .card:hover { transform: translateY(3px); box-shadow: -2px -2px 5px rgba(255,255,255,0.9), 2px 2px 4px rgba(57,65,124,0.2); }
+  .t-cibneu-dark {
+    --bg:#101726; --surface:#101726; --surface-2:#161e30; --border:transparent; --border-strong:rgba(255,255,255,0.18);
+    --text:#e8ecf5; --muted:rgba(232,236,245,0.5); --primary:#4c66c9; --primary-text:#9db4fa;
+    --pos:#58d295; --pos-soft:rgba(88,210,149,0.13); --neg:#ef6f68; --neg-soft:rgba(239,111,104,0.14); --track:rgba(0,0,0,0.35);
+    --nav-bg:#0b1120; --nav-text:#eef2f9;
+    --grad: linear-gradient(51deg, #2f4daa 50%, #3a6fd8 75%, #3b9df0 100%);
+    --bar: linear-gradient(40deg, #2f4daa 0%, #3a6fd8 50%, #3b9df0 100%);
+    --radius-btn: 500px; --radius-card: 12px;
+    --shadow-card: -10px -10px 20px rgba(115,130,190,0.08), 10px 10px 20px rgba(5,8,16,0.3);
+    --shadow-btn: -5px -5px 15px rgba(255,255,255,0.04), 5px 5px 15px rgba(0,0,0,0.25);
+    --shadow-btn-press: -2px -2px 5px rgba(255,255,255,0.04), 2px 2px 5px rgba(0,0,0,0.25);
+    --shadow-btn2: -4px -4px 12px rgba(255,255,255,0.04), 4px 4px 12px rgba(0,0,0,0.2);
+    --input-bg:#101726; --input-border: none;
+    --shadow-input: inset 2px 2px 5px rgba(0,0,0,0.27), inset -2px -2px 5px rgba(255,255,255,0.05);
+    --shadow-track: inset 1px 1px 1px rgba(0,0,0,0.5), inset -1px -1px 1px rgba(255,255,255,0.1);
+  }
+  .t-cibneu-dark .card:hover { transform: translateY(3px); box-shadow: -2px -2px 5px rgba(115,130,190,0.08), 2px 2px 4px rgba(5,8,16,0.35); }
+
+  /* ══ Combo 5-6: DevStack puro ══ */
+  .t-ds-blue {
+    --font:'Manrope', system-ui, sans-serif; --font-head:'Manrope';
+    --bg:#EDF1FA; --surface:#EDF1FA; --surface-2:#E4EAF7; --border:transparent; --border-strong:#c6d0e2;
+    --text:#2D3847; --muted:#66738a; --primary:#1991EE; --primary-text:#1865E0;
+    --pos:#0f9c6d; --pos-soft:#dbf3ea; --neg:#e13a48; --neg-soft:#fbe3e5; --track:#dfe6f2;
+    --nav-bg:#0C273A; --nav-text:#eef2f9;
+    --grad: linear-gradient(51deg, #1865E0 50%, #199EF2 80%, #16B6F5 100%);
+    --bar: linear-gradient(40deg, #1865E0 0%, #199EF2 60%, #16B6F5 100%);
+    --radius-btn: 500px; --radius-card: 12px;
+    --shadow-card: -15px -15px 20px rgba(255,255,255,0.8), 15px 15px 20px rgba(57,65,124,0.08);
+    --shadow-btn: -5px -5px 15px rgba(255,255,255,0.9), 5px 5px 15px rgba(24,101,224,0.3);
+    --shadow-btn-press: -2px -2px 5px rgba(255,255,255,0.9), 2px 2px 5px rgba(24,101,224,0.3);
+    --shadow-btn2: -5px -5px 15px rgba(255,255,255,0.9), 4px 4px 12px rgba(57,65,124,0.2);
+    --input-border: none;
+    --shadow-input: inset 3px 3px 6px rgba(57,65,124,0.1), inset -3px -3px 6px #fff;
+    --shadow-track: inset 1px 1px 1px rgba(57,65,124,0.15), inset -1px -1px 1px #fff;
+  }
+  .t-ds-blue .card:hover { transform: translateY(3px); box-shadow: -2px -2px 5px rgba(255,255,255,0.9), 2px 2px 4px rgba(57,65,124,0.2); }
+  .t-ds-purple {
+    --font:'Manrope', system-ui, sans-serif; --font-head:'Manrope';
+    --bg:#303751; --surface:#303751; --surface-2:#2a3049; --border:transparent; --border-strong:rgba(255,255,255,0.2);
+    --text:rgba(255,255,255,0.9); --muted:rgba(252,252,255,0.45); --primary:#be2af0; --primary-text:#c88cf5;
+    --pos:#09e07a; --pos-soft:rgba(9,224,122,0.14); --neg:#e81898; --neg-soft:rgba(232,24,152,0.16); --track:rgba(0,0,0,0.35);
+    --nav-bg:#141826; --nav-text:#fff;
+    --grad: linear-gradient(51deg, #732edf 50%, #a92ae7 75%, #db29f4 100%);
+    --bar: linear-gradient(40deg, #732edf 0%, #a92ae7 40%, #c729f4 100%);
+    --radius-btn: 500px; --radius-card: 12px;
+    --shadow-card: -10px -10px 20px rgba(115,130,190,0.08), 10px 10px 20px rgba(27,30,45,0.2);
+    --shadow-btn: -5px -5px 15px rgba(255,255,255,0.04), 5px 5px 15px rgba(0,0,0,0.2);
+    --shadow-btn-press: -2px -2px 5px rgba(255,255,255,0.04), 2px 2px 5px rgba(0,0,0,0.2);
+    --shadow-btn2: -4px -4px 12px rgba(255,255,255,0.04), 4px 4px 12px rgba(0,0,0,0.2);
+    --input-bg:#303751; --input-border: none;
+    --shadow-input: inset 2px 2px 5px rgba(0,0,0,0.27), inset -2px -2px 5px rgba(255,255,255,0.05);
+    --shadow-track: inset 1px 1px 1px rgba(0,0,0,0.5), inset -1px -1px 1px rgba(255,255,255,0.1);
+  }
+  .t-ds-purple .card { background: linear-gradient(51deg, #303751 0%, #323a52 100%); }
+  .t-ds-purple .card:hover { transform: translateY(3px); box-shadow: -2px -2px 5px rgba(115,130,190,0.08), 2px 2px 4px rgba(27,30,45,0.3); }
+
+  /* ── Acentos alternativos ── */
+  .accents { margin-top: 32px; }
+  .accents h2 { font-family: 'Archivo', sans-serif; font-size: 16px; margin-bottom: 12px; }
+  .accents .row { gap: 14px; }
+  .sw { flex: 1; min-width: 180px; border-radius: 12px; padding: 14px 16px; color: #fff; font-weight: 700; font-size: 13.5px; box-shadow: 0 6px 18px rgba(22,35,59,0.18); }
+  .sw small { display: block; font-weight: 500; opacity: 0.85; margin-top: 2px; font-size: 11.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Paleta Horario CIB × DevStack</h1>
+  <p class="intro">Los componentes reales de Horario CIB renderizados en seis combinaciones. Arriba, el estado actual (claro y oscuro). En medio, la propuesta mixta: <strong>paleta CIB + acabado neumórfico DevStack</strong> (sombras duales, inputs hundidos, botón pastilla con degradado que se desliza al hacer hover). Abajo, las variantes DevStack puras (light-blue y dark-purple, con Manrope). Pasa el ratón por cards y botones para ver el efecto de hundido.</p>
+
+  <!-- Sprite de iconos UIkit (subset, currentColor) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-calendar" viewBox="0 0 20 20"><path d="M 2,3 2,17 18,17 18,3 2,3 Z M 17,16 3,16 3,8 17,8 17,16 Z M 17,7 3,7 3,4 17,4 17,7 Z"/><rect width="1" height="3" x="6" y="2"/><rect width="1" height="3" x="13" y="2"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 20 20"><circle fill="none" stroke="currentColor" stroke-width="1.1" cx="10" cy="10" r="9"/><rect x="9" y="4" width="1" height="7"/><path fill="none" stroke="currentColor" stroke-width="1.1" d="M13.018,14.197 L9.445,10.625"/></symbol>
+    <symbol id="i-pencil" viewBox="0 0 20 20"><path fill="none" stroke="currentColor" d="M17.25,6.01 L7.12,16.1 L3.82,17.2 L5.02,13.9 L15.12,3.88 C15.71,3.29 16.66,3.29 17.25,3.88 C17.83,4.47 17.83,5.42 17.25,6.01 L17.25,6.01 Z"/><path fill="none" stroke="currentColor" d="M15.98,7.268 L13.851,5.148"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 20 20"><polyline fill="none" stroke="currentColor" points="6.5 3 6.5 1.5 13.5 1.5 13.5 3"/><polyline fill="none" stroke="currentColor" points="4.5 4 4.5 18.5 15.5 18.5 15.5 4"/><rect x="8" y="7" width="1" height="9"/><rect x="11" y="7" width="1" height="9"/><rect x="2" y="3" width="16" height="1"/></symbol>
+    <symbol id="i-download" viewBox="0 0 20 20"><polyline fill="none" stroke="currentColor" points="14,10 9.5,14.5 5,10"/><rect x="9" y="3" width="1" height="11"/><path fill="none" stroke="currentColor" d="M17.5,16.5 L17.5,19.5 L1.5,19.5 L1.5,16.5"/></symbol>
+    <symbol id="i-user" viewBox="0 0 20 20"><circle fill="none" stroke="currentColor" stroke-width="1.1" cx="9.9" cy="6.4" r="4.4"/><path fill="none" stroke="currentColor" stroke-width="1.1" d="M1.5,19 C2.3,14.5 5.8,11.2 9.9,11.2 C14,11.2 17.5,14.6 18.3,19.2"/></symbol>
+    <symbol id="i-sign-out" viewBox="0 0 20 20"><polygon points="13.1 13.4 12.5 12.8 15.28 10 8 10 8 9 15.28 9 12.5 6.2 13.1 5.62 17 9.5"/><polygon points="13 2 3 2 3 17 13 17 13 16 4 16 4 3 13 3"/></symbol>
+    <symbol id="i-users" viewBox="0 0 20 20"><circle fill="none" stroke="currentColor" stroke-width="1.1" cx="7.7" cy="8.6" r="3.5"/><path fill="none" stroke="currentColor" stroke-width="1.1" d="M1,18.1 C1.7,14.6 4.4,12.1 7.6,12.1 C10.9,12.1 13.7,14.8 14.3,18.3"/><path fill="none" stroke="currentColor" stroke-width="1.1" d="M11.4,5.18 C12,4.48 12.9,4 13.9,4 C15.8,4 17.4,5.57 17.4,7.5 C17.4,9.43 15.8,11 13.9,11"/><path fill="none" stroke="currentColor" stroke-width="1.1" d="M15.3,12.9 C17.4,13.9 18.9,15.9 19.2,18.3"/></symbol>
+  </svg>
+
+  <div class="panels">
+    <!-- plantilla de cada panel -->
+    <section class="panel">
+      <div class="panel__head"><h2>1 · CIB actual — claro</h2><code>#f2f5f9 · #2f4daa · Archivo/Public Sans</code></div>
+      <div class="panel__body t-cib-light" id="p1"></div>
+    </section>
+    <section class="panel">
+      <div class="panel__head"><h2>2 · CIB actual — oscuro</h2><code>#0f1524 · #4c66c9</code></div>
+      <div class="panel__body t-cib-dark" id="p2"></div>
+    </section>
+    <section class="panel">
+      <div class="panel__head"><h2>3 · CIB + neumórfico — claro ★</h2><code>paleta CIB azul + sombras/pastilla DevStack</code></div>
+      <div class="panel__body t-cibneu-light" id="p3"></div>
+    </section>
+    <section class="panel">
+      <div class="panel__head"><h2>4 · CIB + neumórfico — oscuro ★</h2><code>receta dark de dark-purple con azules CIB</code></div>
+      <div class="panel__body t-cibneu-dark" id="p4"></div>
+    </section>
+    <section class="panel">
+      <div class="panel__head"><h2>5 · DevStack light-blue puro</h2><code>#EDF1FA · #1991EE · Manrope</code></div>
+      <div class="panel__body t-ds-blue" id="p5"></div>
+    </section>
+    <section class="panel">
+      <div class="panel__head"><h2>6 · DevStack dark-purple puro</h2><code>#303751 · #be2af0 · Manrope</code></div>
+      <div class="panel__body t-ds-purple" id="p6"></div>
+    </section>
+  </div>
+
+  <div class="accents">
+    <h2>Acentos alternativos DevStack (degradados del botón primario)</h2>
+    <div class="row">
+      <div class="sw" style="background:linear-gradient(51deg,#7141f1 50%,#4d6bd8 75%,#3183e2 100%)">Default púrpura-azul<small>#7141f1 → #4d6bd8 → #3183e2</small></div>
+      <div class="sw" style="background:linear-gradient(51deg,#46d4aa 50%,#56dd9a 65%,#72e475 100%)">Light green<small>#46d4aa → #56dd9a → #72e475</small></div>
+      <div class="sw" style="background:linear-gradient(51deg,#fe3966 50%,#ff4538 70%,#ff8a42 100%)">Light orange<small>#fe3966 → #ff4538 → #ff8a42</small></div>
+      <div class="sw" style="background:linear-gradient(51deg,#ee3040 50%,#e4212e 65%,#e65522 100%)">Dark red<small>#ee3040 → #e4212e → #e65522</small></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// El contenido de cada panel es idéntico: se inyecta una sola plantilla
+const tpl = `
+  <div class="mininav"><b>Horario CIB</b><span>Sesión de amiller</span><span class="active">Registros</span></div>
+  <div class="card">
+    <div class="eyebrow">Semana 2026-W20</div>
+    <div class="figrow">
+      <div class="fig">34h 15m <small>/ 35h 00m</small></div>
+      <span class="chip chip--neg">-00h 45m</span>
+    </div>
+    <div class="progress"><i></i></div>
+  </div>
+  <div class="row">
+    <button class="btn btn--primary" type="button">Guardar registro</button>
+    <button class="btn btn--outline" type="button">Exportar Excel</button>
+  </div>
+  <input class="input" type="text" placeholder="Notas de la jornada…">
+  <div class="card" style="padding:0; overflow:hidden;">
+    <table>
+      <tr><th>Fecha</th><th>Total día</th><th>Acumulado</th><th></th></tr>
+      <tr><td>2026-05-16</td><td>07h 15m</td><td><span class="chip chip--pos">+00h 15m</span></td>
+        <td class="ticons"><svg width="17" height="17"><use href="#i-pencil"/></svg><svg width="17" height="17"><use href="#i-trash"/></svg></td></tr>
+      <tr><td>2026-05-12</td><td>06h 59m</td><td><span class="chip chip--neg">-00h 01m</span></td>
+        <td class="ticons"><svg width="17" height="17"><use href="#i-pencil"/></svg><svg width="17" height="17"><use href="#i-trash"/></svg></td></tr>
+    </table>
+  </div>
+  <div class="iconrow">
+    <svg><use href="#i-calendar"/></svg><svg><use href="#i-clock"/></svg><svg><use href="#i-user"/></svg>
+    <svg><use href="#i-users"/></svg><svg><use href="#i-download"/></svg><svg><use href="#i-sign-out"/></svg>
+    <span style="font-size:12px;">iconos UIkit · currentColor</span>
+  </div>`;
+['p1','p2','p3','p4','p5','p6'].forEach(id => document.getElementById(id).innerHTML = tpl);
+</script>
+</body>
+</html>
