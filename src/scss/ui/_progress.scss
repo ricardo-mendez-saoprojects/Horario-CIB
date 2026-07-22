@@ -1,25 +1,25 @@
 // Barra de progreso hacia el objetivo de horas.
-// Firma de la app: una muesca marca el 100 % del objetivo; la barra
-// se queda corta (déficit) o la sobrepasa (superávit).
+// Track hundido (inset DevStack) + barra con el degradado de marca.
+// La muesca del 100 % del objetivo se mantiene: es la firma CIB.
 .progress {
   position: relative;
   height: 8px;
   margin-top: 14px;
   border-radius: 99px;
   background: var(--zero-soft);
+  box-shadow: var(--shadow-track);
   overflow: visible;
 }
 
 .progress__bar {
   height: 100%;
   border-radius: 99px;
-  background: var(--primary);
+  background: var(--grad-bar);
   transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   max-width: 100%;
 }
 
 .progress--pos .progress__bar { background: var(--pos); }
-.progress--neg .progress__bar { background: var(--primary); }
 
 // Muesca del objetivo (100 %)
 .progress::after {

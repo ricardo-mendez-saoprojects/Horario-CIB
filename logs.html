@@ -12,6 +12,12 @@
 <body>
 <script>if(localStorage.getItem('horario-theme')==='dark')document.body.classList.add('dark-mode');</script>
 
+<!-- Sprite de iconos (UIkit, currentColor) usados en esta página -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pencil" viewBox="0 0 20 20"><path fill="none" stroke="currentColor" d="M17.25,6.01 L7.12,16.1 L3.82,17.2 L5.02,13.9 L15.12,3.88 C15.71,3.29 16.66,3.29 17.25,3.88 C17.83,4.47 17.83,5.42 17.25,6.01 L17.25,6.01 Z"/><path fill="none" stroke="currentColor" d="M15.98,7.268 L13.851,5.148"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 20 20"><polyline fill="none" stroke="currentColor" points="6.5 3 6.5 1.5 13.5 1.5 13.5 3"/><polyline fill="none" stroke="currentColor" points="4.5 4 4.5 18.5 15.5 18.5 15.5 4"/><rect fill="currentColor" x="8" y="7" width="1" height="9"/><rect fill="currentColor" x="11" y="7" width="1" height="9"/><rect fill="currentColor" x="2" y="3" width="16" height="1"/></symbol>
+</svg>
+
 <nav class="nav">
   <div class="nav__inner">
     <a class="nav__brand" href="dashboard.html">Horario CIB</a>
@@ -196,8 +202,8 @@
                 <td>Atención a incidencias</td>
                 <td class="text-end">
                   <span class="table__actions">
-                    <a class="btn btn--outline btn--sm" href="log-form.html">Editar</a>
-                    <button class="btn btn--danger btn--sm" type="button">Borrar</button>
+                    <a class="btn--icon" href="log-form.html" aria-label="Editar registro del 2026-05-12"><svg><use href="#i-pencil"/></svg></a>
+                    <button class="btn--icon btn--icon-danger" type="button" aria-label="Borrar registro del 2026-05-12"><svg><use href="#i-trash"/></svg></button>
                   </span>
                 </td>
               </tr>
@@ -207,8 +213,8 @@
                 <td>San Isidro</td>
                 <td class="text-end">
                   <span class="table__actions">
-                    <a class="btn btn--outline btn--sm" href="log-form.html">Editar</a>
-                    <button class="btn btn--danger btn--sm" type="button">Borrar</button>
+                    <a class="btn--icon" href="log-form.html" aria-label="Editar registro del 2026-05-15"><svg><use href="#i-pencil"/></svg></a>
+                    <button class="btn--icon btn--icon-danger" type="button" aria-label="Borrar registro del 2026-05-15"><svg><use href="#i-trash"/></svg></button>
                   </span>
                 </td>
               </tr>
@@ -218,8 +224,8 @@
                 <td>Revisión mensual</td>
                 <td class="text-end">
                   <span class="table__actions">
-                    <a class="btn btn--outline btn--sm" href="log-form.html">Editar</a>
-                    <button class="btn btn--danger btn--sm" type="button">Borrar</button>
+                    <a class="btn--icon" href="log-form.html" aria-label="Editar registro del 2026-05-16"><svg><use href="#i-pencil"/></svg></a>
+                    <button class="btn--icon btn--icon-danger" type="button" aria-label="Borrar registro del 2026-05-16"><svg><use href="#i-trash"/></svg></button>
                   </span>
                 </td>
               </tr>

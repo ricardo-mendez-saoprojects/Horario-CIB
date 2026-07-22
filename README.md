@@ -42,6 +42,8 @@ public/build/  salida de gulp (no se versiona)
 ## Sistema de diseño
 
 - Tokens en `src/scss/base/_variables.scss`: light en `:root`, dark en `body.dark-mode`. Contrastes AA documentados en el propio archivo.
+- **Acabado neumórfico DevStack** (extraído del tema YOOtheme, ver `design-reference/devstack-tokens.md`): la superficie es del mismo tono que el fondo y el relieve lo hacen las sombras duales; inputs "hundidos" (inset), botones pastilla con degradado que se desliza en hover, cards que se hunden al pasar el ratón (salvo las que contienen tablas).
 - Tipografía: Archivo (títulos) + Public Sans (cuerpo), numerales tabulares en todos los datos de tiempo.
-- Los balances se muestran como chips (`.balance--pos/neg/zero`); las barras de progreso llevan una muesca en el 100 % del objetivo.
+- Los balances se muestran como chips (`.balance--pos/neg/zero`); las barras de progreso llevan una muesca en el 100 % del objetivo y el degradado de marca.
+- Iconos: subset UIkit en `currentColor` (sprite inline por página; catálogo completo en `design-reference/iconos/`).
 - FullCalendar y Chart.js se cargan por CDN solo en las páginas que los usan y leen los colores de los tokens.

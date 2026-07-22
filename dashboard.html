@@ -12,6 +12,11 @@
 <body>
 <script>if(localStorage.getItem('horario-theme')==='dark')document.body.classList.add('dark-mode');</script>
 
+<!-- Sprite de iconos (UIkit, currentColor) usados en esta página -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-download" viewBox="0 0 20 20"><polyline fill="none" stroke="currentColor" points="14,10 9.5,14.5 5,10"/><rect fill="currentColor" x="9" y="3" width="1" height="11"/><path fill="none" stroke="currentColor" d="M17.5,16.5 L17.5,19.5 L1.5,19.5 L1.5,16.5"/></symbol>
+</svg>
+
 <nav class="nav">
   <div class="nav__inner">
     <a class="nav__brand" href="dashboard.html">Horario CIB</a>
@@ -41,8 +46,8 @@
       <p class="page-head__sub">Mostrando datos de <strong>amiller</strong></p>
     </div>
     <div class="page-actions">
-      <a class="btn btn--outline" href="#">Exportar Excel</a>
-      <a class="btn btn--outline" href="#">Exportar PDF</a>
+      <a class="btn btn--outline" href="#"><svg aria-hidden="true"><use href="#i-download"/></svg>Exportar Excel</a>
+      <a class="btn btn--outline" href="#"><svg aria-hidden="true"><use href="#i-download"/></svg>Exportar PDF</a>
     </div>
   </div>
 

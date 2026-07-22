@@ -8,17 +8,19 @@
   margin-bottom: 6px;
 }
 
+// Input "hundido" DevStack: sin borde, el relieve lo hace la sombra interior
 .form-control {
   width: 100%;
-  padding: 9px 12px;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  border: none;
+  border-radius: var(--radius-pill);
   background: var(--surface);
   color: var(--text);
   font-size: 14px;
-  transition: border-color 0.15s ease;
+  box-shadow: var(--shadow-input);
+  transition: box-shadow 0.15s ease-in-out;
 
-  &:hover { border-color: var(--text-dim); }
+  &:focus { box-shadow: var(--shadow-input-focus); }
 
   &::placeholder { color: var(--text-dim); }
 }
@@ -26,11 +28,11 @@
 select.form-control { cursor: pointer; }
 
 body.dark-mode select.form-control option {
-  background: var(--surface);
+  background: var(--surface-2);
 }
 
 .form-control--sm {
-  padding: 5px 10px;
+  padding: 6px 12px;
   font-size: 13px;
 }
 

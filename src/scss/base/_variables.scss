@@ -1,16 +1,19 @@
-// ═══ Tokens Horario CIB ═══
-// Identidad propia (no es la marca SAOProjects): azul tinta institucional
-// sobre neutros fríos. Light es el tema base; dark se activa con body.dark-mode.
-// Contrastes verificados sobre --surface (light: #fff · dark: #171f33):
-//   --primary #2f4daa → 7.4:1 · --pos #1a7f4b → 4.6:1 · --neg #c23934 → 4.9:1
-//   --warn-text #9a6a03 → 4.6:1 · --text-muted #5a6478 → 6.4:1
+// ═══ Tokens Horario CIB · acabado neumórfico DevStack (combos 3-4) ═══
+// Identidad propia CIB (azul tinta) + recetas neumórficas extraídas del tema
+// YOOtheme DevStack (ver design-reference/devstack-tokens.md): superficie del
+// mismo tono que el fondo (el relieve lo hacen las sombras duales), inputs
+// hundidos, botón pastilla con degradado que se desliza en hover.
+// Light es el tema base; dark se activa con body.dark-mode.
+// Contrastes sobre --bg (light #f2f5f9 · dark #101726):
+//   --primary-text light #1d5fd6 → 5.1:1 · dark #9db4fa → 9.3:1
+//   --text-muted light #5a6478 → 6.1:1 · --pos #1a7f4b → 4.4:1 (solo chips/bold)
 
 :root {
-  // Neutros
+  // Neutros — la superficie ES el fondo: las cards se separan por sombra
   --bg: #f2f5f9;
-  --surface: #ffffff;
-  --surface-2: #f7f9fc;          // insets, stripes de tabla, cabeceras de card
-  --border: #e2e8f1;
+  --surface: #f2f5f9;
+  --surface-2: #e9edf4;          // insets, cabeceras de tabla, hover de fila
+  --border: #e3e9f2;             // divisores de tabla/listas (las cards no llevan borde)
   --border-strong: #c9d3e2;
 
   // Texto
@@ -18,21 +21,23 @@
   --text-muted: #5a6478;
   --text-dim: #8b93a7;
 
-  // Marca
-  --primary: #2f4daa;
-  --primary-hover: #263f8f;
-  --primary-soft: #e8edfb;       // fondos de chip / hover suave
-  --primary-text: #2f4daa;       // acento usado como texto (links, activos)
+  // Marca: azul CIB con el degradado light-blue DevStack
+  --primary: #1d5fd6;
+  --primary-hover: #1748b8;
+  --primary-soft: #e2eafb;
+  --primary-text: #1d5fd6;
   --on-primary: #ffffff;
+  --grad: linear-gradient(51deg, #1865e0 50%, #199ef2 80%, #16b6f5 100%);
+  --grad-bar: linear-gradient(40deg, #1865e0 0%, #199ef2 60%, #16b6f5 100%);
 
-  // Semánticos de balance (concepto heredado de la app original)
-  --pos: #1a7f4b;   --pos-soft: #e2f5ea;
-  --neg: #c23934;   --neg-soft: #fbe9e8;
-  --zero: #64748b;  --zero-soft: #eef1f5;
+  // Semánticos de balance
+  --pos: #1a7f4b;   --pos-soft: #dff0e7;
+  --neg: #c23934;   --neg-soft: #f7e4e3;
+  --zero: #64748b;  --zero-soft: #e7ebf1;
 
-  // Días no laborables: festivo (ámbar) y vacaciones (celeste)
-  --warn-text: #9a6a03;  --warn-soft: #fdf3d8;
-  --info-text: #14618d;  --info-soft: #dff1fb;
+  // Días no laborables
+  --warn-text: #9a6a03;  --warn-soft: #f6ecd2;
+  --info-text: #14618d;  --info-soft: #dbeef9;
 
   // Navbar: azul marino fijo en ambos temas — ancla la identidad de la app
   --nav-bg: #16233b;
@@ -40,32 +45,45 @@
   --nav-muted: #9aa7c0;
   --nav-border: rgba(255,255,255,0.12);
 
-  // Escalas
+  // Geometría: cards 12px, controles pastilla (receta DevStack)
   --radius-sm: 8px;
   --radius: 12px;
-  --radius-lg: 16px;
-  --shadow-card: 0 1px 2px rgba(22,35,59,0.06), 0 4px 16px rgba(22,35,59,0.05);
+  --radius-lg: 12px;
+  --radius-pill: 500px;
+
+  // Sombras neumórficas (claro): brillo arriba-izda + sombra abajo-dcha
+  --shadow-card: -15px -15px 20px rgba(255,255,255,0.8), 15px 15px 20px rgba(57,65,124,0.08);
+  --shadow-card-press: -2px -2px 5px rgba(255,255,255,0.9), 2px 2px 4px rgba(57,65,124,0.2);
+  --shadow-btn: -5px -5px 15px rgba(255,255,255,0.9), 5px 5px 15px rgba(24,101,224,0.3);
+  --shadow-btn-press: -2px -2px 5px rgba(255,255,255,0.9), 2px 2px 5px rgba(24,101,224,0.3);
+  --shadow-btn-soft: -5px -5px 15px rgba(255,255,255,0.9), 4px 4px 12px rgba(57,65,124,0.2);
+  --shadow-input: inset 3px 3px 6px rgba(57,65,124,0.1), inset -3px -3px 6px #fff;
+  --shadow-input-focus: inset 1px 1px 2px rgba(80,110,140,0.2), inset -1px -1px 2px #fff;
+  --shadow-track: inset 1px 1px 1px rgba(57,65,124,0.15), inset -1px -1px 1px #fff;
   --shadow-pop: 0 8px 30px rgba(22,35,59,0.16);
+
   --nav-h: 64px;
-  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: all 0.2s ease-in-out;
 }
 
 body.dark-mode {
-  --bg: #0f1524;
-  --surface: #171f33;
-  --surface-2: #1d2740;
-  --border: rgba(255,255,255,0.09);
+  --bg: #101726;
+  --surface: #101726;
+  --surface-2: #161e30;
+  --border: rgba(255,255,255,0.08);
   --border-strong: rgba(255,255,255,0.18);
 
   --text: #e8ecf5;
   --text-muted: #a6b0c5;
   --text-dim: #79839b;
 
-  --primary: #4c66c9;            // relleno de botón: blanco encima da 5.4:1
+  --primary: #4c66c9;
   --primary-hover: #5b79e3;
   --primary-soft: rgba(109,139,238,0.16);
-  --primary-text: #9db4fa;       // acento como texto: 7.1:1 sobre surface
+  --primary-text: #9db4fa;
   --on-primary: #ffffff;
+  --grad: linear-gradient(51deg, #2f4daa 50%, #3a6fd8 75%, #3b9df0 100%);
+  --grad-bar: linear-gradient(40deg, #2f4daa 0%, #3a6fd8 50%, #3b9df0 100%);
 
   --pos: #58d295;   --pos-soft: rgba(88,210,149,0.13);
   --neg: #ef6f68;   --neg-soft: rgba(239,111,104,0.14);
@@ -74,9 +92,18 @@ body.dark-mode {
   --warn-text: #e5b558;  --warn-soft: rgba(229,181,88,0.13);
   --info-text: #6fc3ef;  --info-soft: rgba(111,195,239,0.13);
 
-  --nav-bg: #121a2d;
+  --nav-bg: #0b1120;
   --nav-border: rgba(255,255,255,0.09);
 
-  --shadow-card: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.32);
+  // Sombras neumórficas (oscuro): receta de dark-purple — el brillo blanco
+  // baja al 3-8 % de opacidad y la sombra gana peso
+  --shadow-card: -10px -10px 20px rgba(115,130,190,0.08), 10px 10px 20px rgba(5,8,16,0.3);
+  --shadow-card-press: -2px -2px 5px rgba(115,130,190,0.08), 2px 2px 4px rgba(5,8,16,0.35);
+  --shadow-btn: -5px -5px 15px rgba(255,255,255,0.04), 5px 5px 15px rgba(0,0,0,0.25);
+  --shadow-btn-press: -2px -2px 5px rgba(255,255,255,0.04), 2px 2px 5px rgba(0,0,0,0.25);
+  --shadow-btn-soft: -4px -4px 12px rgba(255,255,255,0.04), 4px 4px 12px rgba(0,0,0,0.2);
+  --shadow-input: inset 2px 2px 5px rgba(0,0,0,0.27), inset -2px -2px 5px rgba(255,255,255,0.05);
+  --shadow-input-focus: inset 1px 1px 2px rgba(0,0,0,0.27), inset -1px -1px 2px rgba(255,255,255,0.05);
+  --shadow-track: inset 1px 1px 1px rgba(0,0,0,0.5), inset -1px -1px 1px rgba(255,255,255,0.1);
   --shadow-pop: 0 12px 36px rgba(0,0,0,0.5);
 }

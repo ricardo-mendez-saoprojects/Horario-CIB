@@ -3,29 +3,44 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 9px 16px;
-  border-radius: var(--radius-sm);
+  padding: 9px 18px;
+  border-radius: var(--radius-pill);
   border: 1px solid transparent;
   font-size: 14px;
   font-weight: 600;
   line-height: 1.2;
   white-space: nowrap;
   transition: var(--transition);
+
+  svg { width: 15px; height: 15px; flex-shrink: 0; }
 }
 
+// Receta DevStack: el degradado se define al doble de ancho y el hover
+// transiciona background-position, así el degradado se desliza.
 .btn--primary {
-  background: var(--primary);
+  background: var(--grad);
+  background-size: 200%;
+  background-position-x: 100%;
   color: var(--on-primary);
+  box-shadow: var(--shadow-btn);
 
-  &:hover { background: var(--primary-hover); }
+  &:hover {
+    background-position-x: 0%;
+    box-shadow: var(--shadow-btn-press);
+  }
 }
 
 .btn--outline {
   border-color: var(--border-strong);
   color: var(--text);
   background: var(--surface);
+  box-shadow: var(--shadow-btn-soft);
 
-  &:hover { border-color: var(--primary); color: var(--primary-text); }
+  &:hover {
+    border-color: var(--primary);
+    color: var(--primary-text);
+    box-shadow: var(--shadow-btn-press);
+  }
 }
 
 .btn--ghost {
@@ -43,9 +58,22 @@
 }
 
 .btn--sm {
-  padding: 5px 10px;
+  padding: 5px 12px;
   font-size: 12.5px;
-  border-radius: 7px;
+}
+
+// Botón cuadrado solo-icono (acciones de fila en tablas)
+.btn--icon {
+  padding: 6px;
+  border-radius: 8px;
+  color: var(--text-dim);
+  border: none;
+  background: none;
+
+  svg { width: 17px; height: 17px; }
+
+  &:hover { background: var(--surface-2); color: var(--primary-text); }
+  &.btn--icon-danger:hover { background: var(--neg-soft); color: var(--neg); }
 }
 
 .btn--block { width: 100%; }

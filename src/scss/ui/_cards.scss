@@ -2,10 +2,22 @@
 
 .card {
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   box-shadow: var(--shadow-card);
   overflow: hidden;
+  transition: box-shadow 0.15s ease-in-out, transform 0.15s ease-in-out;
+}
+
+// Firma DevStack: al pasar el ratón la card "se hunde" (baja y la sombra
+// encoge). Se excluyen las cards con tabla: el desplazamiento movería los
+// botones de acción justo cuando el usuario va a pulsarlos.
+.card:not(:has(.table-wrap)):hover {
+  transform: translateY(3px);
+  box-shadow: var(--shadow-card-press);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card:not(:has(.table-wrap)):hover { transform: none; }
 }
 
 .card__header {
