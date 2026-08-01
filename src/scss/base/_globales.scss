@@ -43,11 +43,10 @@ main {
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 
+// Ambas se apilan ya en tablet (≤1024px): en iPad vertical, dos tablas de
+// resumen a media pantalla dejaban la columna Balance cortada
 @include lg {
-  .grid-3 { grid-template-columns: 1fr; }
-}
-@include md {
-  .grid-2 { grid-template-columns: 1fr; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
 }
 
 // ── Cabecera de página: título + acciones

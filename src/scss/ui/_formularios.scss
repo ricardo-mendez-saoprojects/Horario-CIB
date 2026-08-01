@@ -17,12 +17,32 @@
   background: var(--surface);
   color: var(--text);
   font-size: 14px;
+  line-height: 1.35;
+  // Altura común a texto, select, date y time: sin ella cada tipo adopta la
+  // suya (iOS deja los date/time más bajos) y los campos de una misma fila
+  // no alinean
+  min-height: 41px;
   box-shadow: var(--shadow-input);
   transition: box-shadow 0.15s ease-in-out;
 
   &:focus { box-shadow: var(--shadow-input-focus); }
 
   &::placeholder { color: var(--text-dim); }
+}
+
+// Safari de iOS dibuja date/time como controles nativos: centran el valor e
+// imponen su propia altura, así que tres campos seguidos se leían como una
+// sola pastilla. Quitando la apariencia nativa se comportan como el resto
+// (el selector nativo sigue abriéndose al tocarlos).
+input[type="date"].form-control,
+input[type="time"].form-control {
+  -webkit-appearance: none;
+  appearance: none;
+  text-align: left;
+
+  // El indicador nativo se pinta con el color del texto, no en negro fijo
+  &::-webkit-date-and-time-value { text-align: left; }
+  &::-webkit-calendar-picker-indicator { opacity: 0.55; cursor: pointer; }
 }
 
 select.form-control { cursor: pointer; }
@@ -34,6 +54,7 @@ body.dark-mode select.form-control option {
 .form-control--sm {
   padding: 6px 12px;
   font-size: 13px;
+  min-height: 32px;      // anula la altura común de .form-control
 }
 
 // Rejilla de formulario: cada campo declara su ancho con estas clases
@@ -48,7 +69,10 @@ body.dark-mode select.form-control option {
   .field-8  { grid-column: span 8; }
   .field-12 { grid-column: span 12; }
 
-  @include md {
+  // Se apila ya en tablet (≤1024px): en iPad vertical los tres campos de
+  // fecha/hora quedaban a 233px cada uno, demasiado estrechos. A partir de
+  // ahí (portátil y escritorio) sí caben en fila.
+  @include lg {
     .field-3, .field-4, .field-6, .field-8 { grid-column: span 12; }
   }
 }
