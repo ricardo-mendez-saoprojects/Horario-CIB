@@ -4,13 +4,17 @@ Previews del frontend de la app de registro de jornada del CIB (demo visual sin 
 
 ## Arranque
 
+Los HTML se abren directamente (o con cualquier servidor estático) sin compilar nada: `public/build/` está versionado, así que basta con clonar y abrir `index.html`.
+
+Para tocar los estilos o el JS:
+
 ```bash
 npm install
-npm run dev      # compila SCSS/JS y vigila cambios
-npm run build    # build minificada
+npm run dev      # compila SCSS/JS y vigila cambios (sin minificar, con sourcemaps)
+npm run build    # build de producción, minificada
 ```
 
-Los HTML se abren directamente (o con cualquier servidor estático). Cargan `public/build/css/app.css` y `public/build/js/*.min.js`, así que hay que compilar antes.
+**Antes de commitear cambios de `src/`, ejecuta `npm run build`**: los HTML consumen `public/build/css/app.css` y `public/build/js/*.min.js`, y esa carpeta viaja en el repo para que la demo se pueda ver online sin instalar nada. Si dejas `npm run dev` corriendo, su watcher sobrescribe la salida con la versión de desarrollo.
 
 ## Estructura
 
