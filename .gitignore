@@ -1,4 +1,9 @@
 node_modules/
-public/build/
 .DS_Store
 *.log
+
+# public/build/ SÍ se versiona: los HTML lo consumen directamente y es lo que
+# permite servir la demo con GitHub Pages sin necesidad de compilar. Ejecuta
+# `npm run build` (producción, minificado) antes de commitear cambios de SCSS
+# o JS. Los sourcemaps que genera `npm run dev` no se suben.
+*.map
