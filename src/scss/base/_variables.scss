@@ -4,28 +4,37 @@
 // mismo tono que el fondo (el relieve lo hacen las sombras duales), inputs
 // hundidos, botón pastilla con degradado que se desliza en hover.
 // Light es el tema base; dark se activa con body.dark-mode.
-// Contrastes sobre --bg (light #f2f5f9 · dark #101726):
-//   --primary-text light #1d5fd6 → 5.1:1 · dark #9db4fa → 9.3:1
-//   --text-muted light #5a6478 → 6.1:1 · --pos #1a7f4b → 4.4:1 (solo chips/bold)
+// En claro hay DOS superficies (página #ffffff y card #cfe4ff); los tokens de
+// texto se verifican contra la card, que es la más exigente de las dos:
+//   --text        #16233b → 12.7:1 sobre card · 15.9:1 sobre blanco
+//   --text-muted  #48546b →  5.9:1 sobre card ·  7.6:1 sobre blanco
+//   --text-dim    #5a6478 →  4.6:1 sobre card ·  6.0:1 sobre blanco
+//   --primary-text #1a56c4 → 5.1:1 sobre card ·  6.6:1 sobre blanco
+// En oscuro la card es del mismo tono que el fondo (#192133): el relieve lo
+// hacen las sombras, así que basta una verificación por superficie.
 
 :root {
-  // Neutros — la superficie ES el fondo: las cards se separan por sombra
-  --bg: #f2f5f9;
-  --surface: #f2f5f9;
-  --surface-2: #e9edf4;          // insets, cabeceras de tabla, hover de fila
-  --border: #e3e9f2;             // divisores de tabla/listas (las cards no llevan borde)
-  --border-strong: #c9d3e2;
+  // Neutros — fondo blanco y cards azul claro (#cfe4ff): en claro las cards
+  // se separan por color además de por sombra; --surface queda para los
+  // controles (inputs, botones, paginación) que viven encima de las cards
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --card-bg: #cfe4ff;
+  --surface-2: #bdd9fb;          // insets, cabeceras de tabla, hover de fila
+  --border: #b3d0f2;             // divisores de tabla/listas (las cards no llevan borde)
+  --border-strong: #9dbfe8;
 
-  // Texto
+  // Texto — un punto más oscuros que en el tema anterior: la card azul
+  // (#cfe4ff) es más oscura que el fondo blanco y se come el contraste
   --text: #16233b;
-  --text-muted: #5a6478;
-  --text-dim: #8b93a7;
+  --text-muted: #48546b;
+  --text-dim: #5a6478;
 
   // Marca: azul CIB con el degradado light-blue DevStack
   --primary: #1d5fd6;
   --primary-hover: #1748b8;
-  --primary-soft: #e2eafb;
-  --primary-text: #1d5fd6;
+  --primary-soft: #dbe7fd;
+  --primary-text: #1a56c4;
   --on-primary: #ffffff;
   --grad: linear-gradient(51deg, #1865e0 50%, #199ef2 80%, #16b6f5 100%);
   --grad-bar: linear-gradient(40deg, #1865e0 0%, #199ef2 60%, #16b6f5 100%);
@@ -67,9 +76,11 @@
 }
 
 body.dark-mode {
-  --bg: #101726;
-  --surface: #101726;
-  --surface-2: #161e30;
+  // En oscuro la card mantiene la receta neumórfica: mismo tono que el fondo
+  --bg: #192133;
+  --surface: #192133;
+  --card-bg: #192133;
+  --surface-2: #222c44;
   --border: rgba(255,255,255,0.08);
   --border-strong: rgba(255,255,255,0.18);
 

@@ -1,7 +1,7 @@
 @use '../base/mixins' as *;
 
 .card {
-  background: var(--surface);
+  background: var(--card-bg);
   border-radius: var(--radius);
   box-shadow: var(--shadow-card);
   overflow: hidden;
